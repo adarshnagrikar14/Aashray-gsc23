@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:aashray/Login/login.dart';
-import 'package:aashray/mainscreen/mainScreen.dart';
+import 'package:aashray/MainScreen/mainScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -19,11 +19,11 @@ class _SplashscreenState extends State<Splashscreen> {
   void initState() {
     super.initState();
 
+// Customisation
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent, // status bar color
-        //     statusBarIconBrightness: Brightness.light,
-        //     systemNavigationBarColor: Colors.black87,
+        systemNavigationBarColor: Colors.white,
       ),
     );
 

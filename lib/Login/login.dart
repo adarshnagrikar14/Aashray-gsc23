@@ -2,6 +2,7 @@
 
 import 'package:aashray/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -63,6 +64,19 @@ class _LoginPageState extends State<LoginPage> {
         );
       }
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Customisation
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent, // status bar color
+        systemNavigationBarColor: Colors.white,
+      ),
+    );
   }
 
   @override

@@ -1,10 +1,11 @@
 // ignore_for_file: file_names
 
-import 'package:aashray/splashscreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:aashray/Classes/dashboard.dart';
+import 'package:aashray/Classes/help.dart';
+import 'package:aashray/Classes/notifications.dart';
+import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/services.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -14,38 +15,153 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Customisation
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent, // status bar color
+        systemNavigationBarColor: Colors.white,
+      ),
+    );
+  }
+
+  Future<bool> onBackPress() {
+    if (_selectedIndex > 0) {
+      setState(() {
+        _selectedIndex = 0;
+      });
+      return Future.value(false);
+    } else {
+      return Future.value(true);
+    }
+  }
+
+  final List<Widget> _widgetOptions = const <Widget>[
+    Dashboard(),
+    Notifications(),
+    Help(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: ElevatedButton(
-            onPressed: (() async {
-              GoogleSignIn googleSignIn = GoogleSignIn();
-              await googleSignIn.signOut();
-              await FirebaseAuth.instance.signOut();
-
-              // Toast msg
-              Fluttertoast.showToast(
-                msg: "Logout Successful",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                backgroundColor: Colors.black87,
-                textColor: Colors.white,
-                fontSize: 16.0,
-              );
-
-              // start activity
-              // ignore: use_build_context_synchronously
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Splashscreen(),
+    return WillPopScope(
+      onWillPop: () => onBackPress(),
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 1,
+          title: const Text(
+            "Aashray",
+            style: TextStyle(
+              fontSize: 22.0,
+            ),
+          ),
+          actions: <Widget>[
+            // profile
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: GestureDetector(
+                child: const Tooltip(
+                  triggerMode: TooltipTriggerMode.longPress,
+                  message: "Profile",
+                  child: Icon(
+                    Icons.account_circle_outlined,
+                    size: 25.0,
+                  ),
                 ),
-              );
-            }),
-            child: const Text("Signout")),
+                onTap: () {},
+              ),
+            ),
+
+            // settings
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: GestureDetector(
+                child: const Tooltip(
+                  triggerMode: TooltipTriggerMode.longPress,
+                  message: "Settings",
+                  child: Icon(
+                    Icons.settings,
+                    size: 25.0,
+                  ),
+                ),
+                onTap: () {},
+              ),
+            ),
+          ],
+        ),
+
+        // Bottom nav bar
+        bottomNavigationBar: SizedBox(
+          height: 82.0,
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            body: FloatingNavbar(
+              onTap: (int val) {
+                setState(() {
+                  _selectedIndex = val;
+                });
+              },
+              currentIndex: _selectedIndex,
+              backgroundColor: Colors.green,
+              borderRadius: 10.0,
+              itemBorderRadius: 50.0,
+              iconSize: 25.0,
+              unselectedItemColor: Colors.white70,
+              selectedItemColor: Colors.black87,
+              selectedBackgroundColor: Colors.white,
+              items: [
+                FloatingNavbarItem(
+                  icon: Icons.dashboard_rounded,
+                  title: 'Dashboard',
+                ),
+                FloatingNavbarItem(
+                  icon: Icons.notifications_none,
+                  title: 'Notification',
+                ),
+                FloatingNavbarItem(
+                  icon: Icons.help_outline,
+                  title: 'Help',
+                ),
+              ],
+            ),
+          ),
+        ),
+        body: _widgetOptions.elementAt(_selectedIndex),
       ),
     );
   }
 }
+
+// ElevatedButton(
+//           onPressed: (() async {
+//             GoogleSignIn googleSignIn = GoogleSignIn();
+
+//             await FirebaseAuth.instance.signOut();
+//             await googleSignIn.signOut();
+
+//             // Toast msg
+//             Fluttertoast.showToast(
+//               msg: "Logout Successful",
+//               toastLength: Toast.LENGTH_SHORT,
+//               gravity: ToastGravity.BOTTOM,
+//               backgroundColor: Colors.black87,
+//               textColor: Colors.white,
+//               fontSize: 16.0,
+//             );
+
+//             // start activity
+//             // ignore: use_build_context_synchronously
+//             Navigator.pushReplacement(
+//               context,
+//               MaterialPageRoute(
+//                 builder: (context) => const Splashscreen(),
+//               ),
+//             );
+//           }),
+//           child: const Text("Signout"),
+//         ),

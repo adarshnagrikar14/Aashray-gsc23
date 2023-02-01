@@ -45,6 +45,7 @@ dependencies:
 
   google_sign_in: ^5.4.4
   fluttertoast: ^8.1.2
+  floating_bottom_navigation_bar: ^1.5.2
 
 dev_dependencies:
   flutter_test:
