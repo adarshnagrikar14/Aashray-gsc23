@@ -1,8 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:aashray/Login/login.dart';
+import 'package:aashray/mainscreen/mainScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -20,6 +22,8 @@ class _SplashscreenState extends State<Splashscreen> {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent, // status bar color
+        //     statusBarIconBrightness: Brightness.light,
+        //     systemNavigationBarColor: Colors.black87,
       ),
     );
 
@@ -27,15 +31,15 @@ class _SplashscreenState extends State<Splashscreen> {
 
     // Timer for splashscreen
     Timer(
-      const Duration(seconds: 3),
+      const Duration(
+        seconds: 2,
+      ),
       () {
         if (user != null) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               // Main
-              builder: (context) => const Scaffold(
-                backgroundColor: Colors.amber,
-              ),
+              builder: (context) => const MainScreen(),
             ),
           );
         } else {
@@ -43,9 +47,7 @@ class _SplashscreenState extends State<Splashscreen> {
             context,
             MaterialPageRoute(
               // Login
-              builder: (context) => const Scaffold(
-                backgroundColor: Colors.redAccent,
-              ),
+              builder: (context) => const LoginPage(),
             ),
           );
         }
@@ -59,19 +61,12 @@ class _SplashscreenState extends State<Splashscreen> {
       backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network(
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Letter_a.svg/800px-Letter_a.svg.png",
-            scale: 5.0,
-          ),
-          const Text(
-            "Aashray",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14.0,
-              color: Colors.black,
-            ),
+          // logo
+          Image.asset(
+            "assets/images/splash_logo.png",
+            height: 180.0,
           ),
         ],
       ),

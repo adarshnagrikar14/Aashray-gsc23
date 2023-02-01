@@ -12,15 +12,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // status bar color
-  // SystemChrome.setSystemUIOverlayStyle(
-  //   const SystemUiOverlayStyle(
-  //     statusBarIconBrightness: Brightness.light,
-  //     statusBarColor: Colors.black,
-  //     systemNavigationBarColor: Colors.black87,
-  //   ),
-  // );
-
   // Running app:
   runApp(const MyApp());
 }
@@ -35,9 +26,11 @@ class MyApp extends StatelessWidget {
       home: const Splashscreen(), // Splashscreen First
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primarySwatch: Colors.green,
         textTheme: GoogleFonts.rubikTextTheme(
           Theme.of(context).textTheme,
         ),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
     );
   }
