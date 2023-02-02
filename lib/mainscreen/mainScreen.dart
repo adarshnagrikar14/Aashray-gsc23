@@ -3,6 +3,8 @@
 import 'package:aashray/Classes/dashboard.dart';
 import 'package:aashray/Classes/help.dart';
 import 'package:aashray/Classes/notifications.dart';
+import 'package:aashray/Classes/profile.dart';
+import 'package:aashray/Classes/settings.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -73,7 +75,15 @@ class _MainScreenState extends State<MainScreen> {
                     size: 25.0,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      // Login
+                      builder: (context) => const Profile(),
+                    ),
+                  );
+                },
               ),
             ),
 
@@ -89,7 +99,15 @@ class _MainScreenState extends State<MainScreen> {
                     size: 25.0,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      // Login
+                      builder: (context) => const Settings(),
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -136,32 +154,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-
-// ElevatedButton(
-//           onPressed: (() async {
-//             GoogleSignIn googleSignIn = GoogleSignIn();
-
-//             await FirebaseAuth.instance.signOut();
-//             await googleSignIn.signOut();
-
-//             // Toast msg
-//             Fluttertoast.showToast(
-//               msg: "Logout Successful",
-//               toastLength: Toast.LENGTH_SHORT,
-//               gravity: ToastGravity.BOTTOM,
-//               backgroundColor: Colors.black87,
-//               textColor: Colors.white,
-//               fontSize: 16.0,
-//             );
-
-//             // start activity
-//             // ignore: use_build_context_synchronously
-//             Navigator.pushReplacement(
-//               context,
-//               MaterialPageRoute(
-//                 builder: (context) => const Splashscreen(),
-//               ),
-//             );
-//           }),
-//           child: const Text("Signout"),
-//         ),
