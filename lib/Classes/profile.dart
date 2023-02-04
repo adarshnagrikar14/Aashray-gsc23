@@ -56,7 +56,7 @@ class _ProfileState extends State<Profile> {
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
                   backgroundColor: Colors.black87,
-                  textColor: Colors.black,
+                  textColor: Colors.white,
                   fontSize: 16.0,
                 );
               },
