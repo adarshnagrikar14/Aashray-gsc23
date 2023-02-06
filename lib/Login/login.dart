@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:aashray/Classes/mobilenumber.dart';
 import 'package:aashray/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -50,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const Splashscreen(),
+            builder: (context) => const MobileNumberAdd(),
           ),
         );
       } else {
