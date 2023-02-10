@@ -1,10 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
+import 'package:aashray/Classes/permission.dart';
 import 'package:aashray/Login/login.dart';
 import 'package:aashray/MainScreen/mainScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:location/location.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -14,6 +19,8 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
+  var location = Location();
+
   // Initialize
   @override
   void initState() {
@@ -36,12 +43,7 @@ class _SplashscreenState extends State<Splashscreen> {
       ),
       () {
         if (user != null) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              // Main
-              builder: (context) => const MainScreen(),
-            ),
-          );
+          checkPermission();
         } else {
           Navigator.pushReplacement(
             context,
@@ -71,5 +73,24 @@ class _SplashscreenState extends State<Splashscreen> {
         ],
       ),
     );
+  }
+
+  void checkPermission() async {
+    var status = await Permission.location.status;
+    if (status.isGranted) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          // Main
+          builder: (context) => const MainScreen(),
+        ),
+      );
+    } else if (status.isDenied) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          // Main
+          builder: (context) => const PermissionScreen(),
+        ),
+      );
+    }
   }
 }
