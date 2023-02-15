@@ -158,6 +158,85 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
               ),
+
+              // Tile: Helpline
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 12.0,
+                ),
+                child: Card(
+                  color: Colors.grey.shade100,
+                  elevation: 2.0,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Center(
+                      child: Text(
+                        "\nHelpline\n",
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // Tile: T&C
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 12.0,
+                ),
+                child: Card(
+                  color: Colors.grey.shade100,
+                  elevation: 2.0,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Center(
+                      child: Text(
+                        "\nTerms of Use\n",
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // Tile: Test
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 12.0,
+                ),
+                child: Card(
+                  color: Colors.grey.shade100,
+                  elevation: 2.0,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Center(
+                      child: Text(
+                        "\nPhoto and quote as decided.\n",
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              const Center(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: 50.0,
+                    bottom: 10.0,
+                  ),
+                  child: Text("Aur kuchh dalna hai to daal sakte hai "),
+                ),
+              )
             ],
           ),
         ),

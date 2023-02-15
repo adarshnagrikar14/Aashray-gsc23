@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:aashray/Classes/dashboard.dart';
-import 'package:aashray/Classes/help.dart';
+import 'package:aashray/Classes/my_aashray.dart';
 import 'package:aashray/Classes/notifications.dart';
 import 'package:aashray/Classes/profile.dart';
 import 'package:aashray/Classes/settings.dart';
@@ -46,8 +46,8 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _widgetOptions = const <Widget>[
     Dashboard(),
+    MyAashray(),
     Notifications(),
-    Help(),
   ];
 
   @override
@@ -116,7 +116,7 @@ class _MainScreenState extends State<MainScreen> {
 
         // Bottom nav bar
         bottomNavigationBar: SizedBox(
-          height: 82.0,
+          height: 85.0,
           child: Scaffold(
             backgroundColor: Colors.white,
             body: FloatingNavbar(
@@ -129,8 +129,8 @@ class _MainScreenState extends State<MainScreen> {
               backgroundColor: Colors.green,
               borderRadius: 10.0,
               itemBorderRadius: 50.0,
-              iconSize: 25.0,
-              unselectedItemColor: Colors.white70,
+              iconSize: 28.0,
+              unselectedItemColor: Colors.white,
               selectedItemColor: Colors.black87,
               selectedBackgroundColor: Colors.white,
               items: [
@@ -139,12 +139,12 @@ class _MainScreenState extends State<MainScreen> {
                   title: 'Dashboard',
                 ),
                 FloatingNavbarItem(
-                  icon: Icons.notifications_none,
-                  title: 'Notification',
+                  icon: Icons.home_filled,
+                  title: 'My Aashray',
                 ),
                 FloatingNavbarItem(
-                  icon: Icons.help_outline,
-                  title: 'Help',
+                  icon: Icons.notifications_none,
+                  title: 'Notification',
                 ),
               ],
             ),
