@@ -16,6 +16,11 @@ class _PermissionScreenState extends State<PermissionScreen> {
   var location = Location();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,

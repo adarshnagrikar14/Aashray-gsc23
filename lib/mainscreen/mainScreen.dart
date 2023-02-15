@@ -8,8 +8,6 @@ import 'package:aashray/Classes/settings.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:location/location.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,9 +19,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  Location location = Location();
-  late bool serviceEnabled;
-
   @override
   void initState() {
     super.initState();
@@ -31,12 +26,11 @@ class _MainScreenState extends State<MainScreen> {
     // Customisation
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent, // status bar color
+        statusBarColor: Colors.transparent,
         systemNavigationBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.light,
       ),
     );
-
-    askLocationPerm();
   }
 
   Future<bool> onBackPress() {
@@ -159,22 +153,5 @@ class _MainScreenState extends State<MainScreen> {
         body: _widgetOptions.elementAt(_selectedIndex),
       ),
     );
-  }
-
-  void askLocationPerm() async {
-    serviceEnabled = await location.serviceEnabled();
-
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-    } else {
-      Fluttertoast.showToast(
-        msg: "Location enabled",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.black87,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-    }
   }
 }
