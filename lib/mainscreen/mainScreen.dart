@@ -143,7 +143,7 @@ class _MainScreenState extends State<MainScreen> {
                   title: 'My Aashray',
                 ),
                 FloatingNavbarItem(
-                  icon: Icons.notifications_none,
+                  icon: Icons.notifications,
                   title: 'Notification',
                 ),
               ],

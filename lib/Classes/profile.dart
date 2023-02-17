@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:aashray/splashscreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -18,6 +19,7 @@ class _ProfileState extends State<Profile> {
   late String _name;
   late String _email;
   late String _profile;
+  late String _number;
 
   // init
   @override
@@ -28,7 +30,10 @@ class _ProfileState extends State<Profile> {
       _name = user!.displayName!;
       _email = user!.email!;
       _profile = user!.photoURL!;
+      _number = "";
     });
+
+    getUserNumber();
   }
 
   @override
@@ -138,6 +143,27 @@ class _ProfileState extends State<Profile> {
               ),
             ),
 
+            // Gmail
+            const Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Text(
+                "Mo. Number",
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 10.0),
+              child: Text(
+                _number,
+                style: const TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+            ),
+
             const Spacer(),
 
             const Center(
@@ -198,5 +224,23 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
+  }
+
+  void getUserNumber() {
+    final String userID = user!.uid;
+
+    var docRef = FirebaseFirestore.instance
+        .collection('Mobile Numbers')
+        .doc(userID)
+        .collection("Mobile Number: $userID")
+        .doc(userID);
+
+    docRef.get().then((value) {
+      if (value.exists) {
+        setState(() {
+          _number = value.get("Number").toString();
+        });
+      }
+    }).onError((error, stackTrace) => null);
   }
 }

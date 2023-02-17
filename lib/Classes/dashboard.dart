@@ -1,9 +1,12 @@
 import 'dart:async';
 
+import 'package:aashray/Classes/provide_aashray_one.dart';
+import 'package:aashray/Classes/provide_aashray_two.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -25,6 +28,9 @@ class _DashboardState extends State<Dashboard> {
   );
 
   late String _postalCode = "", _cityName = "";
+
+  final Uri _urlDonationSite =
+      Uri.parse("https://pmnrf.gov.in/en/online-donation");
 
   Future<Position> getUserCurrentLocation() async {
     await Geolocator.requestPermission().then((value) {}).onError(
@@ -118,17 +124,20 @@ class _DashboardState extends State<Dashboard> {
                 padding: const EdgeInsets.only(
                   top: 12.0,
                 ),
-                child: Card(
-                  color: Colors.grey.shade100,
-                  elevation: 2.0,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: const Center(
-                      child: Text(
-                        "\nVolunteer\n",
-                        style: TextStyle(
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
+                child: GestureDetector(
+                  onTap: (() => showVolunteerDialog(context)),
+                  child: Card(
+                    color: Colors.grey.shade100,
+                    elevation: 2.0,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(
+                        child: Text(
+                          "\nVolunteer\n",
+                          style: TextStyle(
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -137,21 +146,24 @@ class _DashboardState extends State<Dashboard> {
               ),
 
               // Tile: Donate
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 17.0,
-                ),
-                child: Card(
-                  color: Colors.grey.shade100,
-                  elevation: 2.0,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: const Center(
-                      child: Text(
-                        "\nDonate\n",
-                        style: TextStyle(
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () => showDonateDialog(context),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 17.0,
+                  ),
+                  child: Card(
+                    color: Colors.grey.shade100,
+                    elevation: 2.0,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(
+                        child: Text(
+                          "\nDonate\n",
+                          style: TextStyle(
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -236,41 +248,21 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   child: Text("Aur kuchh dalna hai to daal sakte hai "),
                 ),
-              )
+              ),
+
+              // Center(
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(
+              //       top: 50.0,
+              //       bottom: 10.0,
+              //     ),
+              //     child: Text(getDist()),
+              //   ),
+              // )
             ],
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async {
-      //     getUserCurrentLocation().then(
-      //       (value) async {
-      //         _markers.add(Marker(
-      //           markerId: const MarkerId("1"),
-      //           position: LatLng(value.latitude, value.longitude),
-      //           infoWindow: const InfoWindow(
-      //             title: 'Current Location',
-      //           ),
-      //         ));
-
-      //         // specified current users location
-      //         CameraPosition cameraPosition = CameraPosition(
-      //           target: LatLng(value.latitude, value.longitude),
-      //           zoom: _zoom,
-      //         );
-
-      //         final GoogleMapController controller = await _controller.future;
-      //         controller.animateCamera(
-      //           CameraUpdate.newCameraPosition(cameraPosition),
-      //         );
-      //         // setState(() {});
-      //       },
-      //     );
-      //   },
-      //   child: const Icon(
-      //     Icons.refresh,
-      //   ),
-      // ),
     );
   }
 
@@ -314,4 +306,210 @@ class _DashboardState extends State<Dashboard> {
       },
     );
   }
+
+  showVolunteerDialog(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(
+            20.0,
+          ),
+          topRight: Radius.circular(
+            20.0,
+          ),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SizedBox(
+          height: 400,
+          child: Padding(
+            padding: const EdgeInsets.all(
+              5.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Card(
+                  color: Colors.grey,
+                  child: SizedBox(
+                    height: 5.0,
+                    width: 50.0,
+                  ),
+                ),
+
+                // Tile: Aashray
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProvideAashrayTwo(),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      color: Colors.grey.shade100,
+                      elevation: 2.0,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: const Center(
+                          child: Text(
+                            "\nProvide Aashray\n",
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Tile: Food
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                  ),
+                  child: Card(
+                    color: Colors.grey.shade100,
+                    elevation: 2.0,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(
+                        child: Text(
+                          "\nProvide Food\n",
+                          style: TextStyle(
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  showDonateDialog(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(
+            20.0,
+          ),
+          topRight: Radius.circular(
+            20.0,
+          ),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SizedBox(
+          height: 300,
+          child: Padding(
+            padding: const EdgeInsets.all(
+              5.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Card(
+                  color: Colors.grey,
+                  child: SizedBox(
+                    height: 5.0,
+                    width: 50.0,
+                  ),
+                ),
+
+                // Tile: Donate
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                  ),
+                  child: Card(
+                    color: Colors.grey.shade100,
+                    elevation: 2.0,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(
+                        child: Text(
+                          "\nDonate\n",
+                          style: TextStyle(
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Donate Button
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 8.0,
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () => launchUrlDonation(context),
+                    style: ElevatedButton.styleFrom(
+                      elevation: 2.0,
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    child: SizedBox(
+                      height: 50.0,
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: const Center(
+                        child: Text(
+                          'Donate',
+                          style: TextStyle(
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  launchUrlDonation(BuildContext context) async {
+    if (!await launchUrl(
+      _urlDonationSite,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception("Could not launch $_urlDonationSite");
+    }
+
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context);
+  }
+
+  // String getDist() {
+  //   double dist = Geolocator.distanceBetween(
+  //       21.131327, 79.110804, 21.1761918, 79.0446728);
+
+  //   return dist.toString();
+  // }
 }

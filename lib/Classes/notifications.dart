@@ -12,7 +12,7 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text("Notifications"),
+        child: Text("No Notifications"),
       ),
     );
   }
