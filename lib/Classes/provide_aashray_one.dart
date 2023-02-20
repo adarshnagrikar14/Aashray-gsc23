@@ -464,7 +464,7 @@ class _ProvideAashrayOneState extends State<ProvideAashrayOne> {
                 _loading = false;
               });
 
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const ProvideAashrayTwo(),

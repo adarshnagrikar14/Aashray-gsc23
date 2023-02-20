@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:aashray/Classes/provide_aashray_one.dart';
-import 'package:aashray/Classes/provide_aashray_two.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -349,7 +348,7 @@ class _DashboardState extends State<Dashboard> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ProvideAashrayTwo(),
+                          builder: (context) => const ProvideAashrayOne(),
                         ),
                       );
                     },
