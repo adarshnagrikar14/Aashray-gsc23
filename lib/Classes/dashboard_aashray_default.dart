@@ -7,14 +7,14 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class DashboardDefault extends StatefulWidget {
+  const DashboardDefault({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<DashboardDefault> createState() => _DashboardDefaultState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _DashboardDefaultState extends State<DashboardDefault> {
   final double _zoom = 16.5;
 
   final Completer<GoogleMapController> _controller = Completer();

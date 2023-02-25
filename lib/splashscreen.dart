@@ -2,6 +2,8 @@
 
 import 'dart:async';
 
+import 'package:aashray/Classes/dashboard_aashray_default.dart';
+import 'package:aashray/Classes/dashboard_aashray_home.dart';
 import 'package:aashray/Classes/permission.dart';
 import 'package:aashray/Login/login.dart';
 import 'package:aashray/MainScreen/mainScreen.dart';
@@ -10,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -78,12 +81,62 @@ class _SplashscreenState extends State<Splashscreen> {
   void checkPermission() async {
     var status = await Permission.location.status;
     if (status.isGranted) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          // Main
-          builder: (context) => const MainScreen(),
-        ),
-      );
+      final sharedPrefs = await SharedPreferences.getInstance();
+      final String? screenName = sharedPrefs.getString("screenName");
+
+      switch (screenName) {
+        case "AashrayDefault":
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              // Main
+              builder: (context) => MainScreen(
+                screenName: "AashrayDefault",
+              ),
+            ),
+          );
+          break;
+        case "AashrayHome":
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              // Main
+              builder: (context) => MainScreen(
+                screenName: "AashrayHome",
+              ),
+            ),
+          );
+          break;
+        case "AashrayFood":
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              // Main
+              builder: (context) => MainScreen(
+                screenName: "AashrayFood",
+              ),
+            ),
+          );
+          break;
+
+        case "AashrayEmergency":
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              // Main
+              builder: (context) => MainScreen(
+                screenName: "AashrayEmergency",
+              ),
+            ),
+          );
+          break;
+
+        default:
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              // Main
+              builder: (context) => MainScreen(
+                screenName: "AashrayDefault",
+              ),
+            ),
+          );
+      }
     } else if (status.isDenied) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(

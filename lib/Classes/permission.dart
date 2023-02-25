@@ -125,7 +125,9 @@ class _PermissionScreenState extends State<PermissionScreen> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         // Main
-        builder: (context) => const MainScreen(),
+        builder: (context) => MainScreen(
+          screenName: "AashrayDefault",
+        ),
       ),
     );
   }

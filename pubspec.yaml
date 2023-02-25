@@ -61,6 +61,7 @@ dependencies:
 
   firebase_storage: ^11.0.12
   lottie: ^2.2.0
+  shared_preferences: ^2.0.18
 
 dev_dependencies:
   flutter_test:

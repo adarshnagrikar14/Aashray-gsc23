@@ -1,6 +1,10 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, no_logic_in_create_state
 
-import 'package:aashray/Classes/dashboard.dart';
+import 'dart:async';
+import 'dart:math';
+
+import 'package:aashray/Classes/dashboard_aashray_default.dart';
+import 'package:aashray/Classes/dashboard_aashray_home.dart';
 import 'package:aashray/Classes/my_aashray.dart';
 import 'package:aashray/Classes/notifications.dart';
 import 'package:aashray/Classes/profile.dart';
@@ -8,16 +12,25 @@ import 'package:aashray/Classes/settings.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+// ignore: must_be_immutable
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  String screenName;
+
+  MainScreen({super.key, required this.screenName});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<MainScreen> createState() {
+    return _MainScreenState(screenName);
+  }
 }
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+
+  String screenName = "";
+  _MainScreenState(this.screenName);
 
   @override
   void initState() {
@@ -44,14 +57,18 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  final List<Widget> _widgetOptions = const <Widget>[
-    Dashboard(),
-    MyAashray(),
-    Notifications(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    // list of widgets
+
+    final List<Widget> widgetOptions = <Widget>[
+      getDashboard(screenName),
+      const MyAashray(),
+      const Notifications(),
+    ];
+
+    // return widget
+
     return WillPopScope(
       onWillPop: () => onBackPress(),
       child: Scaffold(
@@ -150,8 +167,50 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ),
-        body: _widgetOptions.elementAt(_selectedIndex),
+        body: widgetOptions.elementAt(_selectedIndex),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            final sharedPrefs = await SharedPreferences.getInstance();
+
+            List<String> names = [
+              "AashrayDefault",
+              "AashrayHome",
+              "AashrayFood",
+              "AashrayEmergency"
+            ];
+            // String randomItem = (names.toList()..shuffle()).first;
+
+            await sharedPrefs.setString(
+                "screenName", names[Random().nextInt(names.length)]);
+          },
+          child: const Icon(
+            Icons.refresh,
+          ),
+        ),
       ),
     );
+  }
+
+  static getDashboard(String screenName) {
+    switch (screenName) {
+      case "AashrayDefault":
+        return const DashboardDefault();
+
+      case "AashrayHome":
+        return const DashboardHome();
+
+      case "AashrayFood":
+        return const Scaffold(
+          backgroundColor: Colors.yellow,
+        );
+
+      case "AashrayEmergency":
+        return const Scaffold(
+          backgroundColor: Colors.red,
+        );
+
+      default:
+        return const DashboardDefault();
+    }
   }
 }

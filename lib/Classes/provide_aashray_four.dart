@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProvideAashrayFour extends StatefulWidget {
   const ProvideAashrayFour({super.key});
@@ -250,6 +251,7 @@ class _ProvideAashrayFourState extends State<ProvideAashrayFour> {
     FirebaseFirestore.instance.collection("Aashrays").doc(userId).update({
       "Maximum Accomodation": "$valueMaxAcc Members",
       "Max Period": "$valuePeriod Days",
+      "userID": userId,
     }).whenComplete(() {
       Fluttertoast.showToast(
         msg: "Uploaded Successfully",
@@ -262,6 +264,8 @@ class _ProvideAashrayFourState extends State<ProvideAashrayFour> {
       setState(() {
         _loading = false;
       });
+
+      storeState();
 
       Navigator.pushReplacement(
         context,
@@ -281,5 +285,10 @@ class _ProvideAashrayFourState extends State<ProvideAashrayFour> {
         );
       },
     );
+  }
+
+  void storeState() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    await sharedPrefs.setString("screenName", "AashrayHome");
   }
 }
