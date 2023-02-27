@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, no_logic_in_create_state
 
 import 'dart:async';
-import 'dart:math';
 
 import 'package:aashray/Classes/dashboard_aashray_default.dart';
 import 'package:aashray/Classes/dashboard_aashray_home.dart';
@@ -12,7 +11,6 @@ import 'package:aashray/Classes/settings.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class MainScreen extends StatefulWidget {
@@ -168,25 +166,25 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         body: widgetOptions.elementAt(_selectedIndex),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            final sharedPrefs = await SharedPreferences.getInstance();
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () async {
+        //     final sharedPrefs = await SharedPreferences.getInstance();
 
-            List<String> names = [
-              "AashrayDefault",
-              "AashrayHome",
-              "AashrayFood",
-              "AashrayEmergency"
-            ];
-            // String randomItem = (names.toList()..shuffle()).first;
+        //     List<String> names = [
+        //       "AashrayDefault",
+        //       "AashrayHome",
+        //       "AashrayFood",
+        //       "AashrayEmergency"
+        //     ];
+        //     // String randomItem = (names.toList()..shuffle()).first;
 
-            await sharedPrefs.setString(
-                "screenName", names[Random().nextInt(names.length)]);
-          },
-          child: const Icon(
-            Icons.refresh,
-          ),
-        ),
+        //     await sharedPrefs.setString(
+        //         "screenName", names[Random().nextInt(names.length)]);
+        //   },
+        //   child: const Icon(
+        //     Icons.refresh,
+        //   ),
+        // ),
       ),
     );
   }
