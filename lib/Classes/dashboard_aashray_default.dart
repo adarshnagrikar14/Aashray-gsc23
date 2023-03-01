@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:aashray/Classes/provide_aashray_one.dart';
+import 'package:aashray/Classes/provide_aashray/provide_aashray_one.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -291,17 +292,17 @@ class _DashboardDefaultState extends State<DashboardDefault> {
           value.longitude,
         );
 
-        setState(() {
-          currentPostion = LatLng(value.latitude, value.longitude);
-          String postalCode = placemarks[0].postalCode as String;
-          String cityName = placemarks[0].locality as String;
-          String test = placemarks[0].subAdministrativeArea as String;
+        currentPostion = LatLng(value.latitude, value.longitude);
+        String postalCode = placemarks[0].postalCode as String;
+        String cityName = placemarks[0].locality as String;
+        String test = placemarks[0].subAdministrativeArea as String;
 
-          setState(() {
-            _postalCode = postalCode;
-            _cityName = "$cityName - $test,";
-          });
+        setState(() {
+          _postalCode = postalCode;
+          _cityName = "$cityName - $test,";
         });
+
+        getUpdateonLaction(postalCode);
       },
     );
   }
@@ -503,6 +504,60 @@ class _DashboardDefaultState extends State<DashboardDefault> {
 
     // ignore: use_build_context_synchronously
     Navigator.pop(context);
+  }
+
+  void getUpdateonLaction(String postalCode) {
+    var docRef = FirebaseFirestore.instance
+        .collection("Disaster Locations")
+        .doc(postalCode);
+
+    docRef.get().then((value) {
+      if (value.exists) {
+        String type = value.get("Type").toString();
+
+        if (type.isNotEmpty) {
+          getAlert(type);
+        }
+      }
+    }).onError((error, stackTrace) => null);
+  }
+
+  void getAlert(String type) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: const Text("You are likely to be in a disaster prone zone"),
+        content: const Text("Please continue to seek Aashray"),
+        // backgroundColor: Colors.green.shade100,
+        actions: <Widget>[
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 12.0,
+              ),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: const Center(
+                    child: Text(
+                  "Continue",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                )),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   // String getDist() {

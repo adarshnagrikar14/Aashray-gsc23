@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:aashray/Classes/provide_aashray_one.dart';
-import 'package:aashray/MainScreen/mainScreen.dart';
-import 'package:aashray/trial.dart';
+import 'package:aashray/Classes/provide_aashray/provide_aashray_one.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
