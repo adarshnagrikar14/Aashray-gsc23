@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:aashray/Classes/dashboard_aashray_default.dart';
+import 'package:aashray/Classes/dashboard_aashray_emergency.dart';
 import 'package:aashray/Classes/dashboard_aashray_home.dart';
 import 'package:aashray/Classes/my_aashray.dart';
 import 'package:aashray/Classes/notifications.dart';
@@ -203,9 +204,7 @@ class _MainScreenState extends State<MainScreen> {
         );
 
       case "AashrayEmergency":
-        return const Scaffold(
-          backgroundColor: Colors.red,
-        );
+        return const DashboardEmergency();
 
       default:
         return const DashboardDefault();

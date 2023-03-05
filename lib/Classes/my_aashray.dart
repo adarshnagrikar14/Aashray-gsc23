@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:aashray/Classes/provide_aashray/provide_aashray_one.dart';
+import 'package:aashray/splashscreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyAashray extends StatefulWidget {
   const MyAashray({super.key});
@@ -121,9 +125,9 @@ class _MyAashrayState extends State<MyAashray> {
                                                   Brightness.dark
                                               ? Colors.white
                                               : Colors.black)
-                                          .withOpacity(_current == entry.key
-                                              ? 0.9
-                                              : 0.4),
+                                          .withOpacity(
+                                        _current == entry.key ? 0.9 : 0.4,
+                                      ),
                                     ),
                                   ),
                                 );
@@ -187,11 +191,49 @@ class _MyAashrayState extends State<MyAashray> {
                                 ),
                               ),
                             ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 8.0,
+                              ),
+                              child: Text(
+                                // ignore: prefer_interpolation_to_compose_strings
+                                "Availability:\t" +
+                                    documents["Max Period"]
+                                        .toString()
+                                        .toLowerCase(),
+                                style: const TextStyle(
+                                  fontSize: 17.5,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 8.0,
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.hotel_outlined),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Text(
+                                      documents["Rooms"] +
+                                          " Room(s) with " +
+                                          documents["Beds"] +
+                                          " Bed(s)",
+                                      style: const TextStyle(
+                                        fontSize: 17.5,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                  top: 18.0,
+                                  top: 28.0,
                                   bottom: 10.0,
                                   left: 10.0,
                                   right: 10.0,
@@ -226,6 +268,36 @@ class _MyAashrayState extends State<MyAashray> {
                                 ),
                               ),
                             ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 10.0,
+                                  bottom: 10.0,
+                                  left: 10.0,
+                                  right: 10.0,
+                                ),
+                                child: OutlinedButton(
+                                  onPressed: () => deleteAashray(),
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(
+                                      width: 2.0,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: Text(
+                                      "Delete Aashray",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -239,6 +311,77 @@ class _MyAashrayState extends State<MyAashray> {
           },
         ),
       ),
+    );
+  }
+
+  deleteAashray() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Delete Aashray?"),
+          content: const Text("Confirm deleting the Aashray."),
+          actions: <Widget>[
+            OutlinedButton(
+              onPressed: () => Navigator.pop(context),
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(
+                  width: 2.0,
+                  color: Colors.green,
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Text(
+                  "Close",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                var docRef = FirebaseFirestore.instance
+                    .collection("Aashrays")
+                    .doc(_userId);
+
+                docRef.delete().whenComplete(
+                  () async {
+                    final sharedPrefs = await SharedPreferences.getInstance();
+                    await sharedPrefs.setString("screenName", "AashrayDefault");
+
+                    Navigator.pop(context);
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        // Main
+                        builder: (context) => const Splashscreen(),
+                      ),
+                    );
+                  },
+                );
+              },
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(
+                  width: 2.0,
+                  color: Colors.red,
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Text(
+                  "Delete",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

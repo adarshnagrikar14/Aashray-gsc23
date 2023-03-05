@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:aashray/Classes/provide_aashray/provide_aashray_one.dart';
+import 'package:aashray/Classes/provide_food/provide_food_one.dart';
+import 'package:aashray/splashscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DashboardDefault extends StatefulWidget {
@@ -377,17 +380,28 @@ class _DashboardDefaultState extends State<DashboardDefault> {
                   padding: const EdgeInsets.only(
                     top: 12.0,
                   ),
-                  child: Card(
-                    color: Colors.grey.shade100,
-                    elevation: 2.0,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: Text(
-                          "\nProvide Food\n",
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProvideFoodOne(),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      color: Colors.grey.shade100,
+                      elevation: 2.0,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: const Center(
+                          child: Text(
+                            "\nProvide Food\n",
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -527,13 +541,31 @@ class _DashboardDefaultState extends State<DashboardDefault> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Text("You are likely to be in a disaster prone zone"),
-        content: const Text("Please continue to seek Aashray"),
+        title: Text(
+          "You are likely to be in a disaster prone zone.\nType: $type",
+        ),
+        content: const Text(
+          "Please continue to seek Aashray.",
+        ),
         // backgroundColor: Colors.green.shade100,
         actions: <Widget>[
           ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
+            onPressed: () async {
+              final sharedPrefs = await SharedPreferences.getInstance();
+
+              await sharedPrefs
+                  .setString("screenName", "AashrayEmergency")
+                  .then(
+                (value) {
+                  Navigator.pop(context);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Splashscreen(),
+                    ),
+                  );
+                },
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,

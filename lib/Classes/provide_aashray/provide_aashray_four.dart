@@ -266,13 +266,6 @@ class _ProvideAashrayFourState extends State<ProvideAashrayFour> {
       });
 
       storeState();
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const ProvideAashrayReview(),
-        ),
-      );
     }).onError(
       (error, stackTrace) {
         Fluttertoast.showToast(
@@ -289,6 +282,13 @@ class _ProvideAashrayFourState extends State<ProvideAashrayFour> {
 
   void storeState() async {
     final sharedPrefs = await SharedPreferences.getInstance();
-    await sharedPrefs.setString("screenName", "AashrayHome");
+    await sharedPrefs.setString("screenName", "AashrayHome").then((value) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProvideAashrayReview(),
+        ),
+      );
+    });
   }
 }

@@ -100,7 +100,7 @@ class _SplashscreenState extends State<Splashscreen> {
             MaterialPageRoute(
               // Main
               builder: (context) => MainScreen(
-                screenName: "AashrayDefault",
+                screenName: "AashrayHome",
               ),
             ),
           );
