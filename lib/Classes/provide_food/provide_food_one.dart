@@ -196,6 +196,18 @@ class _ProvideFoodOneState extends State<ProvideFoodOne> {
                   ),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 10.0,
+                  bottom: 10.0,
+                ),
+                child: Text(
+                  "This mobile no. will be shared with the Aashray seeker.",
+                  style: TextStyle(
+                    fontSize: 14.0,
+                  ),
+                ),
+              ),
 
               // mobile edittext
               Padding(

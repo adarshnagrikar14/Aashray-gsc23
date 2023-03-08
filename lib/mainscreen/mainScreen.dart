@@ -2,10 +2,12 @@
 
 import 'dart:async';
 
-import 'package:aashray/Classes/dashboard_aashray_default.dart';
-import 'package:aashray/Classes/dashboard_aashray_emergency.dart';
-import 'package:aashray/Classes/dashboard_aashray_home.dart';
+import 'package:aashray/Classes/dashboard_aashray/dashboard_aashray_default.dart';
+import 'package:aashray/Classes/dashboard_aashray/dashboard_aashray_emergency.dart';
+import 'package:aashray/Classes/dashboard_aashray/dashboard_aashray_food.dart';
+import 'package:aashray/Classes/dashboard_aashray/dashboard_aashray_home.dart';
 import 'package:aashray/Classes/my_aashray.dart';
+import 'package:aashray/Classes/my_food_profile.dart';
 import 'package:aashray/Classes/notifications.dart';
 import 'package:aashray/Classes/profile.dart';
 import 'package:aashray/Classes/settings.dart';
@@ -62,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
 
     final List<Widget> widgetOptions = <Widget>[
       getDashboard(screenName),
-      const MyAashray(),
+      getDashboardTwo(screenName),
       const Notifications(),
     ];
 
@@ -154,10 +156,7 @@ class _MainScreenState extends State<MainScreen> {
                   icon: Icons.dashboard_rounded,
                   title: 'Dashboard',
                 ),
-                FloatingNavbarItem(
-                  icon: Icons.home_filled,
-                  title: 'My Aashray',
-                ),
+                getIcon(screenName),
                 FloatingNavbarItem(
                   icon: Icons.notifications,
                   title: 'Notification',
@@ -199,15 +198,39 @@ class _MainScreenState extends State<MainScreen> {
         return const DashboardHome();
 
       case "AashrayFood":
-        return const Scaffold(
-          backgroundColor: Colors.yellow,
-        );
+        return const DashboardFood();
 
       case "AashrayEmergency":
         return const DashboardEmergency();
 
       default:
         return const DashboardDefault();
+    }
+  }
+
+  getIcon(String screenName) {
+    switch (screenName) {
+      case "AashrayFood":
+        return FloatingNavbarItem(
+          icon: Icons.food_bank_rounded,
+          title: 'Food Provider',
+        );
+
+      default:
+        return FloatingNavbarItem(
+          icon: Icons.home_filled,
+          title: 'My Aashray',
+        );
+    }
+  }
+
+  getDashboardTwo(String screenName) {
+    switch (screenName) {
+      case "AashrayFood":
+        return const MyFoodProfile();
+
+      default:
+        return const MyAashray();
     }
   }
 }

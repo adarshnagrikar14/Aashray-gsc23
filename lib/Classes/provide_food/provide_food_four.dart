@@ -1,21 +1,33 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:aashray/Classes/provide_food/provide_food_three.dart';
+import 'package:aashray/Classes/provide_food/provide_food_review.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProvideFoodTwo extends StatefulWidget {
-  const ProvideFoodTwo({super.key});
+class ProvideFoodFour extends StatefulWidget {
+  const ProvideFoodFour({super.key});
 
   @override
-  State<ProvideFoodTwo> createState() => _ProvideFoodTwoState();
+  State<ProvideFoodFour> createState() => _ProvideFoodFourState();
 }
 
-class _ProvideFoodTwoState extends State<ProvideFoodTwo> {
-  String _selectedMeal = "";
+class _ProvideFoodFourState extends State<ProvideFoodFour> {
+  final TextEditingController _controllerMin = TextEditingController();
+  final TextEditingController _controllerMax = TextEditingController();
+  final TextEditingController _controllerAvg = TextEditingController();
+
   late bool _loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controllerAvg.text = "";
+    _controllerMax.text = "";
+    _controllerMin.text = "1";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,91 +72,103 @@ class _ProvideFoodTwoState extends State<ProvideFoodTwo> {
             Padding(
               padding: EdgeInsets.only(top: 10.0),
               child: Text(
-                "Select type of Meal",
+                "Enter Maximum and average capacity of people you can provide the food.",
                 style: TextStyle(
                   fontSize: 18.5,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
+            // Input
             Padding(
               padding: EdgeInsets.only(
-                top: 8.0,
-                bottom: 20.0,
+                top: 25.0,
+              ),
+              child: TextField(
+                keyboardType: TextInputType.numberWithOptions(
+                  signed: false,
+                  decimal: false,
+                ),
+                controller: _controllerMin,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Enter Minimum No. of People",
+                ),
+                style: TextStyle(
+                  fontSize: 18.0,
+                ),
+                enabled: false,
+              ),
+            ),
+            // Input
+            Padding(
+              padding: EdgeInsets.only(
+                top: 25.0,
+              ),
+              child: TextField(
+                keyboardType: TextInputType.numberWithOptions(
+                  signed: false,
+                  decimal: false,
+                ),
+                controller: _controllerMax,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Enter Maximum No. of People",
+                ),
+                style: TextStyle(
+                  fontSize: 18.0,
+                ),
+                onChanged: (value) {
+                  makeAverage();
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                top: 13.0,
+                bottom: 15.0,
               ),
               child: Text(
-                "You can opt for only one meal option.",
+                "Maximum no. of people you can feed.",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+
+            // Input
+            Padding(
+              padding: EdgeInsets.only(
+                top: 25.0,
+              ),
+              child: TextField(
+                keyboardType: TextInputType.numberWithOptions(
+                  signed: false,
+                  decimal: false,
+                ),
+                controller: _controllerAvg,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Enter Average No. of People",
+                ),
                 style: TextStyle(
                   fontSize: 18.0,
                 ),
               ),
             ),
-            ListTile(
-              leading: Radio<String>(
-                value: 'Breakfast',
-                groupValue: _selectedMeal,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedMeal = value!;
-                  });
-                },
+            Padding(
+              padding: EdgeInsets.only(
+                top: 13.0,
+                bottom: 15.0,
               ),
-              onTap: (() {
-                setState(() {
-                  _selectedMeal = "Breakfast";
-                });
-              }),
-              title: const Text(
-                'Breakfast',
+              child: Text(
+                "Average no. of people you can feed. The estimated average is calculated for the Max people you provide. You can change it on your own.",
                 style: TextStyle(
-                  fontSize: 17.0,
+                  fontSize: 16,
                 ),
               ),
             ),
-            ListTile(
-              leading: Radio<String>(
-                value: 'Lunch',
-                groupValue: _selectedMeal,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedMeal = value!;
-                  });
-                },
-              ),
-              onTap: (() {
-                setState(() {
-                  _selectedMeal = "Lunch";
-                });
-              }),
-              title: const Text(
-                'Lunch',
-                style: TextStyle(
-                  fontSize: 17.0,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Radio<String>(
-                value: 'Dinner',
-                groupValue: _selectedMeal,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedMeal = value!;
-                  });
-                },
-              ),
-              onTap: (() {
-                setState(() {
-                  _selectedMeal = "Dinner";
-                });
-              }),
-              title: const Text(
-                'Dinner',
-                style: TextStyle(
-                  fontSize: 17.0,
-                ),
-              ),
-            ),
+
             Spacer(),
             Center(
               child: Padding(
@@ -153,7 +177,8 @@ class _ProvideFoodTwoState extends State<ProvideFoodTwo> {
                 ),
                 child: ElevatedButton(
                   onPressed: (() {
-                    saveandnext();
+                    saveandnext(_controllerMin.text, _controllerMax.text,
+                        _controllerAvg.text);
                   }),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8,
@@ -198,13 +223,27 @@ class _ProvideFoodTwoState extends State<ProvideFoodTwo> {
     );
   }
 
-  void saveandnext() {
+  void makeAverage() {
+    int avgOne = int.parse(_controllerMax.text);
+
+    int avgTwo = avgOne + 1;
+
+    double avgThree = avgTwo / 2;
+
+    int avg = avgThree.round();
+
+    setState(() {
+      _controllerAvg.text = "$avg";
+    });
+  }
+
+  void saveandnext(String min, String max, String avg) {
     String userId;
     final User? user = FirebaseAuth.instance.currentUser;
 
     userId = user!.uid;
 
-    if (_selectedMeal.isNotEmpty) {
+    if (min.isNotEmpty && max.isNotEmpty && avg.isNotEmpty) {
       setState(() {
         _loading = !_loading;
       });
@@ -213,7 +252,10 @@ class _ProvideFoodTwoState extends State<ProvideFoodTwo> {
           .collection("Food Providers")
           .doc(userId)
           .update({
-        "Meal Type": _selectedMeal,
+        "Minimum": min,
+        "Maximum": max,
+        "Average": avg,
+        "userID": userId,
       }).whenComplete(() {
         Fluttertoast.showToast(
           msg: "Uploaded Successfully",
@@ -227,12 +269,7 @@ class _ProvideFoodTwoState extends State<ProvideFoodTwo> {
           _loading = false;
         });
 
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const ProvideFoodThree(),
-          ),
-        );
+        setScreen();
       }).onError((error, stackTrace) => null);
     } else {
       Fluttertoast.showToast(
@@ -244,5 +281,17 @@ class _ProvideFoodTwoState extends State<ProvideFoodTwo> {
         fontSize: 16.0,
       );
     }
+  }
+
+  void setScreen() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    await sharedPrefs.setString("screenName", "AashrayFood").then((value) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProvideFoodReview(),
+        ),
+      );
+    });
   }
 }

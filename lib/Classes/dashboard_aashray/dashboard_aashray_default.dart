@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:aashray/Classes/provide_aashray/provide_aashray_one.dart';
+import 'package:aashray/Classes/provide_food/provide_food_four.dart';
 import 'package:aashray/Classes/provide_food/provide_food_one.dart';
+import 'package:aashray/Classes/provide_food/provide_food_three.dart';
+import 'package:aashray/Classes/provide_food/provide_food_two.dart';
 import 'package:aashray/splashscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -132,15 +135,22 @@ class _DashboardDefaultState extends State<DashboardDefault> {
                   child: Card(
                     color: Colors.grey.shade100,
                     elevation: 2.0,
-                    child: SizedBox(
+                    child: Container(
                       width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: Text(
-                          "\nVolunteer\n",
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      color: Colors.green,
+                      child: Center(
+                        // child: Text(
+                        //   "\nVolunteer\n",
+                        //   style: TextStyle(
+                        //     fontSize: 25.0,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: SizedBox(
+                              child:
+                                  Image.asset("assets/images/volunteer.png")),
                         ),
                       ),
                     ),

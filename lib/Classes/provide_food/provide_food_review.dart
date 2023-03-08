@@ -5,21 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 
-class ProvideAashrayReview extends StatefulWidget {
-  const ProvideAashrayReview({super.key});
+class ProvideFoodReview extends StatefulWidget {
+  const ProvideFoodReview({super.key});
 
   @override
-  State<ProvideAashrayReview> createState() => _ProvideAashrayReviewState();
+  State<ProvideFoodReview> createState() => _ProvideFoodReviewState();
 }
 
-class _ProvideAashrayReviewState extends State<ProvideAashrayReview> {
+class _ProvideFoodReviewState extends State<ProvideFoodReview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 1.0,
-        title: const Text("Review Aashray"),
+        title: const Text("Review Details"),
         actions: [
           // settings
           Padding(
@@ -79,7 +79,7 @@ class _ProvideAashrayReviewState extends State<ProvideAashrayReview> {
             Padding(
               padding: EdgeInsets.only(top: 8.0),
               child: Text(
-                "Your Aashray will be available to the needy people as mentioned by you.\nYou can edit and see your Aashray in 'My Aashray' Section.",
+                "Your details will be visible to the Aashray seekers. They will contact you in the need.\nPlease try to provide all the necessary help as mentioned by you.",
                 style: TextStyle(
                   fontSize: 15.0,
                 ),

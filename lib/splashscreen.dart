@@ -2,8 +2,6 @@
 
 import 'dart:async';
 
-import 'package:aashray/Classes/dashboard_aashray_default.dart';
-import 'package:aashray/Classes/dashboard_aashray_home.dart';
 import 'package:aashray/Classes/permission.dart';
 import 'package:aashray/Login/login.dart';
 import 'package:aashray/MainScreen/mainScreen.dart';
