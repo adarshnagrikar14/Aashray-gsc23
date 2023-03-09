@@ -1,11 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
-import 'package:aashray/Classes/provide_aashray/provide_aashray_one.dart';
 import 'package:aashray/Classes/provide_food/provide_food_one.dart';
 import 'package:aashray/splashscreen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,9 +19,7 @@ class _MyFoodProfileState extends State<MyFoodProfile> {
   final User? user = FirebaseAuth.instance.currentUser;
   // uid
   late String _userId;
-
-  int _current = 0;
-  final CarouselController _controllerCarousel = CarouselController();
+  late bool _valueSwitch = true;
 
   @override
   void initState() {
@@ -60,9 +57,6 @@ class _MyFoodProfileState extends State<MyFoodProfile> {
                 primary: false,
                 children: snapshot.data!.docs.map(
                   (documents) {
-                    // final List<dynamic> imageURLs =
-                    //     documents["ImageLists"].toList();
-
                     return Card(
                       color: Colors.grey.shade100,
                       elevation: 3.0,
@@ -71,174 +65,159 @@ class _MyFoodProfileState extends State<MyFoodProfile> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // CarouselSlider.builder(
-                            //   options: CarouselOptions(
-                            //     height: 180.0,
-                            //     disableCenter: true,
-                            //     autoPlayInterval: const Duration(
-                            //       seconds: 3,
-                            //     ),
-                            //     viewportFraction: 1.0,
-                            //     autoPlay: true,
-                            //     enableInfiniteScroll: false,
-                            //     onPageChanged: (index, reason) {
-                            //       setState(
-                            //         () {
-                            //           _current = index;
-                            //         },
-                            //       );
-                            //     },
-                            //   ),
-                            //   itemCount: imageURLs.length,
-                            //   itemBuilder: (BuildContext context, int index,
-                            //       int realIndex) {
-                            //     return Builder(
-                            //       builder: (BuildContext context) {
-                            //         return Container(
-                            //           decoration: const BoxDecoration(
-                            //             color: Colors.green,
-                            //           ),
-                            //           child: Padding(
-                            //             padding: const EdgeInsets.all(2.0),
-                            //             child: Image.network(
-                            //               imageURLs[index],
-                            //               fit: BoxFit.cover,
-                            //             ),
-                            //           ),
-                            //         );
-                            //       },
-                            //     );
-                            //   },
-                            // ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: imageURLs.asMap().entries.map((entry) {
-                            //     return GestureDetector(
-                            //       onTap: () => _controllerCarousel
-                            //           .animateToPage(entry.key),
-                            //       child: Container(
-                            //         width: 8.0,
-                            //         height: 8.0,
-                            //         margin: const EdgeInsets.symmetric(
-                            //             vertical: 8.0, horizontal: 4.0),
-                            //         decoration: BoxDecoration(
-                            //           shape: BoxShape.circle,
-                            //           color: (Theme.of(context).brightness ==
-                            //                       Brightness.dark
-                            //                   ? Colors.white
-                            //                   : Colors.black)
-                            //               .withOpacity(
-                            //             _current == entry.key ? 0.9 : 0.4,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     );
-                            //   }).toList(),
-                            // ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(
-                            //     top: 8.0,
-                            //   ),
-                            //   child: Text(
-                            //     // ignore: prefer_interpolation_to_compose_strings
-                            //     "Address: " +
-                            //         documents["Address"]
-                            //             .toString()
-                            //             .toLowerCase(),
-                            //     style: const TextStyle(
-                            //       fontSize: 17.5,
-                            //       fontWeight: FontWeight.bold,
-                            //     ),
-                            //   ),
-                            // ),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 200.0,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                    "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/teamwork-in-homeless-shelter-royalty-free-image-1608327313.?crop=1.00xw:0.755xh;0,0.142xh&resize=1200:*",
+                                  ),
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(12.0),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 8.0,
+                                bottom: 10.0,
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.green.shade100,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12.0),
+                                  ),
+                                ),
+                                child: ListTile(
+                                  leading: null,
+                                  title: Text(
+                                    "\t\tProvide Food",
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  trailing: CupertinoSwitch(
+                                    value: _valueSwitch,
+                                    activeColor: Colors.green.shade300,
+                                    trackColor: Colors.white,
+                                    thumbColor: _valueSwitch
+                                        ? Colors.green.shade900
+                                        : Colors.red,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _valueSwitch = !_valueSwitch;
+                                      });
+                                    },
+                                  ),
+                                  contentPadding: EdgeInsets.all(2.0),
+                                  onTap: () {
+                                    setState(
+                                      () {
+                                        _valueSwitch = !_valueSwitch;
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(
                                 top: 8.0,
                               ),
                               child: Text(
-                                documents["Name"] + "'s Aashray\n",
+                                // ignore: prefer_interpolation_to_compose_strings
+                                "Food Provider:\t\t" +
+                                    documents["Name"].toString(),
                                 style: const TextStyle(
-                                  fontSize: 17.0,
+                                  fontSize: 18.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(
-                            //     top: 8.0,
-                            //   ),
-                            //   child: Text(
-                            //     // ignore: prefer_interpolation_to_compose_strings
-                            //     "Preference: " +
-                            //         documents["Accomodation"]
-                            //             .toString()
-                            //             .toLowerCase(),
-                            //     style: const TextStyle(
-                            //       fontSize: 17.5,
-                            //     ),
-                            //   ),
-                            // ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(
-                            //     top: 8.0,
-                            //   ),
-                            //   child: Text(
-                            //     // ignore: prefer_interpolation_to_compose_strings
-                            //     "Max. Accomodation:\t" +
-                            //         documents["Maximum Accomodation"]
-                            //             .toString()
-                            //             .toLowerCase(),
-                            //     style: const TextStyle(
-                            //       fontSize: 17.5,
-                            //     ),
-                            //   ),
-                            // ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(
-                            //     top: 8.0,
-                            //   ),
-                            //   child: Text(
-                            //     // ignore: prefer_interpolation_to_compose_strings
-                            //     "Availability:\t" +
-                            //         documents["Max Period"]
-                            //             .toString()
-                            //             .toLowerCase(),
-                            //     style: const TextStyle(
-                            //       fontSize: 17.5,
-                            //     ),
-                            //   ),
-                            // ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(
-                            //     top: 8.0,
-                            //   ),
-                            //   child: Row(
-                            //     crossAxisAlignment: CrossAxisAlignment.center,
-                            //     children: [
-                            //       const Icon(Icons.hotel_outlined),
-                            //       Padding(
-                            //         padding: const EdgeInsets.only(left: 8.0),
-                            //         child: Text(
-                            //           documents["Rooms"] +
-                            //               " Room(s) with " +
-                            //               documents["Beds"] +
-                            //               " Bed(s)",
-                            //           style: const TextStyle(
-                            //             fontSize: 17.5,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 8.0,
+                              ),
+                              child: Text(
+                                // ignore: prefer_interpolation_to_compose_strings
+                                "Mobile No.:\t\t" +
+                                    documents["Mobile"].toString(),
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 8.0,
+                                bottom: 15.0,
+                              ),
+                              child: Text(
+                                // ignore: prefer_interpolation_to_compose_strings
+                                "Address:\t\t" +
+                                    documents["Address"].toString(),
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 8.0,
+                              ),
+                              child: Text(
+                                // ignore: prefer_interpolation_to_compose_strings
+                                "Meal type:\t\t" +
+                                    documents["Meal Type"].toString(),
+                                style: const TextStyle(
+                                  fontSize: 17.5,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 8.0,
+                              ),
+                              child: Text(
+                                // ignore: prefer_interpolation_to_compose_strings
+                                "Average capacity to feed:\t\t" +
+                                    documents["Average"].toString() +
+                                    "\t people",
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 8.0,
+                              ),
+                              child: Text(
+                                // ignore: prefer_interpolation_to_compose_strings
+                                "Preferred Dates:\n" +
+                                    documents["Initial Date"].toString() +
+                                    " to " +
+                                    documents["End Date"].toString(),
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  height: 1.3,
+                                ),
+                              ),
+                            ),
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
                               child: Padding(
                                 padding: const EdgeInsets.only(
                                   top: 28.0,
                                   bottom: 10.0,
-                                  left: 10.0,
-                                  right: 10.0,
+                                  // left: 10.0,
+                                  // right: 10.0,
                                 ),
                                 child: OutlinedButton(
                                   onPressed: () {
@@ -258,7 +237,7 @@ class _MyFoodProfileState extends State<MyFoodProfile> {
                                     ),
                                   ),
                                   child: const Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                    padding: EdgeInsets.all(15.0),
                                     child: Text(
                                       "Edit Details",
                                       style: TextStyle(
@@ -276,11 +255,11 @@ class _MyFoodProfileState extends State<MyFoodProfile> {
                                 padding: const EdgeInsets.only(
                                   top: 10.0,
                                   bottom: 10.0,
-                                  left: 10.0,
-                                  right: 10.0,
+                                  // left: 10.0,
+                                  // right: 10.0,
                                 ),
                                 child: OutlinedButton(
-                                  onPressed: () => deleteAashray(),
+                                  onPressed: () => deleteFoodProfile(),
                                   style: OutlinedButton.styleFrom(
                                     side: const BorderSide(
                                       width: 2.0,
@@ -288,7 +267,7 @@ class _MyFoodProfileState extends State<MyFoodProfile> {
                                     ),
                                   ),
                                   child: const Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                    padding: EdgeInsets.all(15.0),
                                     child: Text(
                                       "Delete Food Profile",
                                       style: TextStyle(
@@ -307,8 +286,6 @@ class _MyFoodProfileState extends State<MyFoodProfile> {
                   },
                 ).toList(),
               );
-              // }  else {
-              //   return const Center(child: Text("No Data Found!"));
             }
           },
         ),
@@ -316,7 +293,7 @@ class _MyFoodProfileState extends State<MyFoodProfile> {
     );
   }
 
-  deleteAashray() {
+  deleteFoodProfile() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
