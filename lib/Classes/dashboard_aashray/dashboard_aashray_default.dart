@@ -1,15 +1,15 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'dart:async';
 
 import 'package:aashray/Classes/provide_aashray/provide_aashray_one.dart';
-import 'package:aashray/Classes/provide_food/provide_food_four.dart';
 import 'package:aashray/Classes/provide_food/provide_food_one.dart';
-import 'package:aashray/Classes/provide_food/provide_food_three.dart';
-import 'package:aashray/Classes/provide_food/provide_food_two.dart';
 import 'package:aashray/splashscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -120,6 +120,22 @@ class _DashboardDefaultState extends State<DashboardDefault> {
                   "You are at a safe place. But you can help the needy people by clicking any of the facility below.",
                   style: TextStyle(
                     fontSize: 17.0,
+                    // fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              const Padding(
+                padding: EdgeInsets.only(
+                  top: 15.0,
+                  bottom: 2.0,
+                  right: 2.0,
+                  left: 2.0,
+                ),
+                child: Text(
+                  "Volunteer Options below:",
+                  style: TextStyle(
+                    fontSize: 22.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -128,7 +144,8 @@ class _DashboardDefaultState extends State<DashboardDefault> {
               // Tile: Volunteer
               Padding(
                 padding: const EdgeInsets.only(
-                  top: 12.0,
+                  top: 18.0,
+                  bottom: 50.0,
                 ),
                 child: GestureDetector(
                   onTap: (() => showVolunteerDialog(context)),
@@ -158,51 +175,131 @@ class _DashboardDefaultState extends State<DashboardDefault> {
                 ),
               ),
 
-              // Tile: Donate
-              GestureDetector(
-                onTap: () => showDonateDialog(context),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 17.0,
+              const Padding(
+                padding: EdgeInsets.only(
+                  bottom: 20.0,
+                  right: 2.0,
+                  left: 2.0,
+                ),
+                child: Text(
+                  "Donation Options below:",
+                  style: TextStyle(
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
                   ),
-                  child: Card(
-                    color: Colors.grey.shade100,
-                    elevation: 2.0,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: Text(
-                          "\nDonate\n",
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.green,
+                  ),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  color: Colors.green.shade100,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(
+                    8.0,
+                  ),
+                  child: Text(
+                    "\"It's not how much we give\nbut how much love we put into giving\"\n-Mother Teresa",
+                    style: GoogleFonts.lobster(
+                      textStyle: const TextStyle(
+                        fontSize: 28,
+                        // fontWeight: FontWeight.bold,
+
+                        color: Colors.black,
                       ),
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
 
-              // Tile: Helpline
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 12.0,
-                ),
-                child: Card(
-                  color: Colors.grey.shade100,
-                  elevation: 2.0,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: const Center(
-                      child: Text(
-                        "\nHelpline\n",
-                        style: TextStyle(
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+              SizedBox(
+                height: 40.0,
+              ),
+
+              Card(
+                elevation: 2.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
                     ),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                    color: Colors.grey.shade100,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          "\nFurther more, you can even contribute to the disaster relief fund. To know more, click below.\n",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Center(
+                          child: Image.asset(
+                            "assets/images/donation.png",
+                            height: 200.0,
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 60.0,
+                              bottom: 10.0,
+                            ),
+                            child: OutlinedButton(
+                              onPressed: (() => launchUrlDonation(context)),
+                              style: OutlinedButton.styleFrom(
+                                side: const BorderSide(
+                                  width: 2.0,
+                                  color: Color.fromARGB(255, 187, 169, 5),
+                                ),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(15.0),
+                                child: Text(
+                                  "Donate Now",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 118, 103, 3),
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+
+              const Padding(
+                padding: EdgeInsets.only(
+                  top: 15.0,
+                  bottom: 2.0,
+                  right: 2.0,
+                  left: 2.0,
+                ),
+                child: Text(
+                  "More Options below:",
+                  style: TextStyle(
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -211,67 +308,40 @@ class _DashboardDefaultState extends State<DashboardDefault> {
               Padding(
                 padding: const EdgeInsets.only(
                   top: 12.0,
+                  bottom: 25.0,
                 ),
                 child: Card(
                   color: Colors.grey.shade100,
                   elevation: 2.0,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: const Center(
-                      child: Text(
-                        "\nTerms of Use\n",
-                        style: TextStyle(
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 22.0,
+                        horizontal: 20.0,
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.import_contacts_rounded,
+                            size: 30.0,
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text(
+                            "Terms of Use",
+                            style: TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
-
-              // Tile: Test
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 12.0,
-                ),
-                child: Card(
-                  color: Colors.grey.shade100,
-                  elevation: 2.0,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: const Center(
-                      child: Text(
-                        "\nPhoto and quote as decided.\n",
-                        style: TextStyle(
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-              const Center(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    top: 50.0,
-                    bottom: 10.0,
-                  ),
-                  child: Text("Aur kuchh dalna hai to daal sakte hai "),
-                ),
-              ),
-
-              // Center(
-              //   child: Padding(
-              //     padding: const EdgeInsets.only(
-              //       top: 50.0,
-              //       bottom: 10.0,
-              //     ),
-              //     child: Text(getDist()),
-              //   ),
-              // )
             ],
           ),
         ),
@@ -412,98 +482,6 @@ class _DashboardDefaultState extends State<DashboardDefault> {
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
                             ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  showDonateDialog(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(
-            20.0,
-          ),
-          topRight: Radius.circular(
-            20.0,
-          ),
-        ),
-      ),
-      builder: (BuildContext context) {
-        return SizedBox(
-          height: 300,
-          child: Padding(
-            padding: const EdgeInsets.all(
-              5.0,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Card(
-                  color: Colors.grey,
-                  child: SizedBox(
-                    height: 5.0,
-                    width: 50.0,
-                  ),
-                ),
-
-                // Tile: Donate
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 12.0,
-                  ),
-                  child: Card(
-                    color: Colors.grey.shade100,
-                    elevation: 2.0,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: Text(
-                          "\nDonate\n",
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                // Donate Button
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 8.0,
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () => launchUrlDonation(context),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 2.0,
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    child: SizedBox(
-                      height: 50.0,
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      child: const Center(
-                        child: Text(
-                          'Donate',
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
