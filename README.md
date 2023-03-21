@@ -4,6 +4,10 @@
 > <h3>An approach to provide a source of light to the needy people during any pandemic situation. Basically, Aashray is a sanskrit word which means a shelter. As the name suggests, our app aims to provide shelter and food for the needy people stucked in any pandemic situation. By getting real-time location of the user, the app locates a self offered Aashray or shelter or a food source provided by the volunteer who offered by their consent.
 </h3>
 <br>
+<h1>Download direct Apk from here</h1>
+
+https://drive.google.com/file/d/1DYj2BDKP3dEn6XW9YIKRen8BCykYVNUS/view?usp=sharing
+
 <h1>Steps to test the app</h1>
 <br>
 
