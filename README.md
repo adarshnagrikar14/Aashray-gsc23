@@ -44,3 +44,8 @@ flutter pub get
 ```
 flutter run
 ```
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 138fbfb7db2ea326698b2f0aa4f4e2382c11ae21
