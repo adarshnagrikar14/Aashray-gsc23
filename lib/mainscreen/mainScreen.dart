@@ -14,9 +14,6 @@ import 'package:aashray/Classes/settings.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../splashscreen.dart';
 
 // ignore: must_be_immutable
 class MainScreen extends StatefulWidget {
@@ -169,38 +166,38 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         body: widgetOptions.elementAt(_selectedIndex),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            final sharedPrefs = await SharedPreferences.getInstance();
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () async {
+        //     final sharedPrefs = await SharedPreferences.getInstance();
 
-            List<String> names = [
-              "AashrayDefault",
-              "AashrayHome",
-              "AashrayFood",
-              "AashrayEmergency"
-            ];
+        //     List<String> names = [
+        //       "AashrayDefault",
+        //       "AashrayHome",
+        //       "AashrayFood",
+        //       "AashrayEmergency"
+        //     ];
 
-            await sharedPrefs
-                .setString(
-              "screenName",
-              names[0],
-            )
-                .then(
-              (value) {
-                Navigator.pushAndRemoveUntil<dynamic>(
-                  context,
-                  MaterialPageRoute<dynamic>(
-                    builder: (BuildContext context) => const Splashscreen(),
-                  ),
-                  (route) => false,
-                );
-              },
-            );
-          },
-          child: const Icon(
-            Icons.refresh,
-          ),
-        ),
+        //     await sharedPrefs
+        //         .setString(
+        //       "screenName",
+        //       names[0],
+        //     )
+        //         .then(
+        //       (value) {
+        //         Navigator.pushAndRemoveUntil<dynamic>(
+        //           context,
+        //           MaterialPageRoute<dynamic>(
+        //             builder: (BuildContext context) => const Splashscreen(),
+        //           ),
+        //           (route) => false,
+        //         );
+        //       },
+        //     );
+        //   },
+        //   child: const Icon(
+        //     Icons.refresh,
+        //   ),
+        // ),
       ),
     );
   }

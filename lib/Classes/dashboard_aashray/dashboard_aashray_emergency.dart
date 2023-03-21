@@ -427,7 +427,7 @@ class _DashboardEmergencyState extends State<DashboardEmergency> {
                                                       color: Colors.green,
                                                     ),
                                                     Text(
-                                                      "\t\Locate Aashray",
+                                                      "\t\tLocate Aashray",
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 18.0,
