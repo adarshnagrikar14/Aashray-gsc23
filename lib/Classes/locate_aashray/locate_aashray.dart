@@ -19,6 +19,7 @@ import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 class LocateAashray extends StatefulWidget {
   final QueryDocumentSnapshot document;
   const LocateAashray(this.document, {super.key});
+
   @override
   State<StatefulWidget> createState() {
     return LocateAashrayState(document);
@@ -29,7 +30,7 @@ class LocateAashrayState extends State<LocateAashray> {
   final QueryDocumentSnapshot document;
   LocateAashrayState(this.document);
 
-  final String googleAPiKey = "AIzaSyDhZIxVTj8be4Qfr8gqP06NPVhNJxVKn6c";
+  final String googleAPiKey = "Direction API key";
 
   PolylinePoints polylinePoints = PolylinePoints();
 
