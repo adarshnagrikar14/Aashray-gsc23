@@ -97,7 +97,11 @@ Your location is added in emergency locations. You can test the Emergency Screen
 <h4>
 1. Adarsh Nagrikar
 <br> <br>
-[<img alt="Linkedin" src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=black" />][https://www.linkedin.com/in/adarsh-nagrikar/] <br>
-[<img alt="Github" src="https://img.shields.io/github/followers/adarshnagrikar14?style=social" height = "30px"] [https://www.linkedin.com/in/adarsh-nagrikar/]<br>
+<a href="https://www.linkedin.com/in/adarsh-nagrikar/">
+  <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=black" alt="Linkedin" height="32px">
+</a> <br> <br>
+<a href="https://github.com/adarshnagrikar14">
+  <img src="https://img.shields.io/github/followers/adarshnagrikar14?style=social" alt="Linkedin" height="32px">
+</a>
 </h4>
 <br>
