@@ -65,5 +65,39 @@ Here you can see and edit your entered details for <br> providing a meal | This 
 
 <br>
 <h1>Steps to Test the App</h1>
-<h5>You need to create a testing location for emergency screen</h5>
+<h5>You need to create a testing location in Firebase Firestore database for emergency screen</h5>
+<br>
+
+1. We assume that firebase project is already created for the app and ***google-services.json*** is added to android/app. Follow the below steps to test.
+```
+i. Setup Firebase Auth.
+ii. Add SHA Keys in the project.
+iii. Create Firebase Firestore Database. 
+```
+2. Create a ***Collection*** named ***Disaster Locations***
+
+<img style= "margin-left: auto; margin-right: auto;" src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreenshot%202023-03-22%20180622.png?alt=media&token=ced9dd24-3b01-4420-a04b-62836646f18c" alt = "Firebase">
+
+3. Create a ***Document*** named ***Your area Pincode*** e.g 440001 (In)
+
+4. Add field ***Type*** and value with any type of disaster as shown.
+<img style= "margin-left: auto; margin-right: auto;" src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreenshot%202023-03-22%20181358.png?alt=media&token=f64595e4-17f7-4bc5-8eaa-3a3ec8f0f571" alt = "Firebase">
+
+5. Good to go!
+```
+Your location is added in emergency locations. You can test the Emergency Screen now.
+```
+<br>
+
+<h1>Attributions</h1>
+<h4>1. Thankyou Flaticon for the required vector images. Visit here to know more www.flaticon.com <br>2. Thankyou Freepik for the required images and graphics. Visit here to know more www.freepik.com <br>3. Thankyou Lottiefiles for the required animation files. Visit here to know more www.lottiefiles.com </h4>
+<br>
+
+<h1>A Team work by</h1>
+<h4>
+1. Adarsh Nagrikar
+<br> <br>
+[<img alt="Linkedin" src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=black" />][https://www.linkedin.com/in/adarsh-nagrikar/] <br>
+[<img alt="Github" src="https://img.shields.io/github/followers/adarshnagrikar14?style=social" height = "30px"] [https://www.linkedin.com/in/adarsh-nagrikar/]<br>
+</h4>
 <br>
