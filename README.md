@@ -8,7 +8,7 @@
 
 https://drive.google.com/file/d/1DYj2BDKP3dEn6XW9YIKRen8BCykYVNUS/view?usp=sharing
 
-<h1>Steps to test the app</h1>
+<h1>Steps to Run the App</h1>
 <br>
 
 1. As we assume that flutter is properly installed on the machine, please do follow the below steps to test the App.
@@ -48,3 +48,22 @@ flutter pub get
 ```
 flutter run
 ```
+
+<br>
+<h1>Feature tour:</h1>
+<h5>Basic 4 Functionalities are available in case of any non emergency or an emergency situation.</h5>
+
+Default Screen | Aashray Screen
+-------------- | --------------
+Content from cell 1 | Content from cell 2
+<img src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreen1.jpg?alt=media&token=7b085e23-0a36-44a8-8215-e41beefd22e3" alt = "One" width="720" height="1080"> | <img src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreen%20Home.jpg?alt=media&token=0cdd3e65-c02a-40a5-90c4-8ae1110f5dd1" alt = "Two" width="720" height="1080">
+
+Food Provider Screen | Emergency Screen
+-------------------- | ----------------
+Content from cell 3 | Content from cell 4
+<img src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreen%20Food.jpg?alt=media&token=c53e5626-2cff-4094-b69c-71518eb38807" alt = "Three" width="720" height="1080"> | <img src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2Femergency%20screen.gif?alt=media&token=f65920cf-8d02-46f1-91ed-51c4dbde951d" alt = "Four" width="720" height="1080">
+
+<br>
+<h1>Steps to Test the App</h1>
+<h5>You need to create a testing location for emergency screen</h5>
+<br>
