@@ -94,7 +94,7 @@ Your location is added in emergency locations. You can test the Emergency Screen
 <br>
 
 <h1>A Team work by</h1>
-<h4>
+<h3>
 1. Adarsh Nagrikar
 <br> <br>
 <a href="https://www.linkedin.com/in/adarsh-nagrikar/">
@@ -103,5 +103,27 @@ Your location is added in emergency locations. You can test the Emergency Screen
 <a href="https://github.com/adarshnagrikar14">
   <img src="https://img.shields.io/github/followers/adarshnagrikar14?style=social" alt="Linkedin" height="32px">
 </a>
-</h4>
+</h3>
+<br>
+<h3>
+2. Harshita Soni
+<br> <br>
+<a href="https://www.linkedin.com/in/harshita-soni-85ba6922a/">
+  <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=black" alt="Linkedin" height="32px">
+</a> <br> <br>
+<a href="https://github.com/h-o-n-e-y">
+  <img src="https://img.shields.io/github/followers/h-o-n-e-y?style=social" alt="Linkedin" height="32px">
+</a>
+</h3>
+<br>
+<h3>
+3. Advika Metre
+<br> <br>
+<a href="https://www.linkedin.com/in/advika-metre-9a2aaa234/">
+  <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=black" alt="Linkedin" height="32px">
+</a> <br> <br>
+<a href="https://github.com/advikasm">
+  <img src="https://img.shields.io/github/followers/advikasm?style=social" alt="Linkedin" height="32px">
+</a>
+</h3>
 <br>
