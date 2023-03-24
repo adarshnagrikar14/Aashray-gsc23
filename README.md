@@ -90,7 +90,7 @@ Your location is added in emergency locations. You can test the Emergency Screen
 <br>
 
 <h1>Attributions</h1>
-<h4>1. Thankyou Flaticon for the required vector images. Visit here to know more www.flaticon.com <br>2. Thankyou Freepik for the required images and graphics. Visit here to know more www.freepik.com <br>3. Thankyou Lottiefiles for the required animation files. Visit here to know more www.lottiefiles.com </h4>
+<h4>1. Thankyou Flaticon for the required vector images. Visit here to know more www.flaticon.com <br>2. Thankyou Freepik for the required images and graphics. Visit here to know more www.freepik.com <br>3. Thankyou Lottiefiles for the required animation files. Visit here to know more www.lottiefiles.com <br>4. Thankyou Flutter team for making app development easier and faster. Visit here to know more www.flutter.dev</h4>
 <br>
 
 <h1>A Team work by</h1>
