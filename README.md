@@ -6,7 +6,7 @@
 <br>
 <h1>Download direct Apk from here</h1>
 
-https://drive.google.com/drive/folders/1vIr3uVVrolrkUUH6H2FLIpCTbDF05LXF?usp=sharing
+https://drive.google.com/file/d/1SbCqrEGiTkATxFM_jSZtnqIAwDrNcqZy/view?usp=share_link
 
 <h1>Steps to Run the App</h1>
 <br>
