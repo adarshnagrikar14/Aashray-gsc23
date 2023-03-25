@@ -64,6 +64,16 @@ Here you can see and edit your entered details for <br> providing a meal | This 
 <img style= "margin-left: auto; margin-right: auto;" src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreen%20Food.jpg?alt=media&token=c53e5626-2cff-4094-b69c-71518eb38807" alt = "Three" width="243" height="500"> | <img src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2Femergency%20screen.gif?alt=media&token=f65920cf-8d02-46f1-91ed-51c4dbde951d" alt = "Four" width="243" height="500">
 
 <br>
+<h1>Features to be implemented:</h1>
+<h5>Two features are in development and are to be rolled in the next update. Here are some glimpses</h5>
+<br>
+
+Latest News | ChatBot Help
+-------------------- | ----------------
+Here you can see the latest global News. It will <br> make you aware of the current situation <br> about any mishap. | This unique feature will provide an extra <br> help in any situation.
+<img style= "margin-left: auto; margin-right: auto;" src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FNews.jpg?alt=media&token=c5559de7-3bb4-4988-adc8-b4999468e574" alt = "One" width="243" height="500"> | <img src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2Fchatbot.jpg?alt=media&token=413923e2-91d9-448f-ad22-f53f0579aa6f" alt = "Two" width="243" height="500">
+
+<br>
 <h1>Steps to Test the App</h1>
 <h5>You need to create a testing location in Firebase Firestore database for emergency screen</h5>
 <br>

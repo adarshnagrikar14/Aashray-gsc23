@@ -503,9 +503,6 @@ class _DashboardDefaultState extends State<DashboardDefault> {
     )) {
       throw Exception("Could not launch $_urlDonationSite");
     }
-
-    // ignore: use_build_context_synchronously
-    Navigator.pop(context);
   }
 
   void getUpdateonLaction(String postalCode) {

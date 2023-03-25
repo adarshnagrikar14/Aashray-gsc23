@@ -2,13 +2,14 @@
 
 import 'dart:async';
 
+import 'package:aashray/Classes/chat_screen.dart';
 import 'package:aashray/Classes/dashboard_aashray/dashboard_aashray_default.dart';
 import 'package:aashray/Classes/dashboard_aashray/dashboard_aashray_emergency.dart';
 import 'package:aashray/Classes/dashboard_aashray/dashboard_aashray_food.dart';
 import 'package:aashray/Classes/dashboard_aashray/dashboard_aashray_home.dart';
 import 'package:aashray/Classes/my_aashray.dart';
 import 'package:aashray/Classes/my_food_profile.dart';
-import 'package:aashray/Classes/notifications.dart';
+import 'package:aashray/Classes/latest_news.dart';
 import 'package:aashray/Classes/profile.dart';
 import 'package:aashray/Classes/settings.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
@@ -65,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
     final List<Widget> widgetOptions = <Widget>[
       getDashboard(screenName),
       getDashboardTwo(screenName),
-      const Notifications(),
+      const LatestNews(),
     ];
 
     // return widget
@@ -82,6 +83,33 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           actions: <Widget>[
+            // chat
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 18.0,
+                vertical: 2.0,
+              ),
+              child: GestureDetector(
+                child: const Tooltip(
+                  triggerMode: TooltipTriggerMode.longPress,
+                  message: "ChatBot",
+                  child: Icon(
+                    Icons.chat,
+                    size: 25.0,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      // Login
+                      builder: (context) => const ChatBotScreen(),
+                    ),
+                  );
+                },
+              ),
+            ),
+
             // profile
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -158,8 +186,8 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 getIcon(screenName),
                 FloatingNavbarItem(
-                  icon: Icons.notifications,
-                  title: 'Notification',
+                  icon: Icons.newspaper_outlined,
+                  title: 'Latest News',
                 ),
               ],
             ),
