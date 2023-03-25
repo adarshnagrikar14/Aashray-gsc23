@@ -4,7 +4,11 @@
 > <h3>An approach to provide a source of light to the needy people during any pandemic situation. Basically, Aashray is a sanskrit word which means a shelter. As the name suggests, our app aims to provide shelter and food for the needy people stucked in any pandemic situation. By getting real-time location of the user, the app locates a self offered Aashray or shelter or a food source provided by the volunteer who offered by their consent.
 </h3>
 <br>
-<h1>Steps to test the app</h1>
+<h1>Download direct Apk from here</h1>
+
+https://drive.google.com/file/d/1DYj2BDKP3dEn6XW9YIKRen8BCykYVNUS/view?usp=sharing
+
+<h1>Steps to Run the App</h1>
 <br>
 
 1. As we assume that flutter is properly installed on the machine, please do follow the below steps to test the App.
@@ -44,3 +48,82 @@ flutter pub get
 ```
 flutter run
 ```
+
+<br>
+<h1>Feature tour:</h1>
+<h5>Basic 4 Functionalities are available in case of any non emergency or an emergency situation.</h5>
+
+Default Screen | Aashray Screen 
+-------------- | --------------
+In this default page, you can volunteer for Aashray <br> or Food | Here you can see and edit your entered aashray <br> details
+<img src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreen1.jpg?alt=media&token=7b085e23-0a36-44a8-8215-e41beefd22e3" alt = "One" width="243" height="500"> | <img src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreen%20Home.jpg?alt=media&token=0cdd3e65-c02a-40a5-90c4-8ae1110f5dd1" alt = "Two" width="243" height="500">
+
+Food Provider Screen | Emergency Screen
+-------------------- | ----------------
+Here you can see and edit your entered details for <br> providing a meal | This screen will let you know the emergency and <br> provide aashray or food provider's details
+<img style= "margin-left: auto; margin-right: auto;" src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreen%20Food.jpg?alt=media&token=c53e5626-2cff-4094-b69c-71518eb38807" alt = "Three" width="243" height="500"> | <img src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2Femergency%20screen.gif?alt=media&token=f65920cf-8d02-46f1-91ed-51c4dbde951d" alt = "Four" width="243" height="500">
+
+<br>
+<h1>Steps to Test the App</h1>
+<h5>You need to create a testing location in Firebase Firestore database for emergency screen</h5>
+<br>
+
+1. We assume that firebase project is already created for the app and ***google-services.json*** is added to android/app. Follow the below steps to test.
+```
+i. Setup Firebase Auth.
+ii. Add SHA Keys in the project.
+iii. Create Firebase Firestore Database. 
+```
+2. Create a ***Collection*** named ***Disaster Locations***
+
+<img style= "margin-left: auto; margin-right: auto;" src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreenshot%202023-03-22%20180622.png?alt=media&token=ced9dd24-3b01-4420-a04b-62836646f18c" alt = "Firebase">
+
+3. Create a ***Document*** named ***Your area Pincode*** e.g 440001 (In)
+
+4. Add field ***Type*** and value with any type of disaster as shown.
+<img style= "margin-left: auto; margin-right: auto;" src="https://firebasestorage.googleapis.com/v0/b/app-aashray.appspot.com/o/AppScreenshots%2FScreenshot%202023-03-22%20181358.png?alt=media&token=f64595e4-17f7-4bc5-8eaa-3a3ec8f0f571" alt = "Firebase">
+
+5. Good to go!
+```
+Your location is added in emergency locations. You can test the Emergency Screen now.
+```
+<br>
+
+<h1>Attributions</h1>
+<h4>1. Thankyou Flaticon for the required vector images. Visit here to know more www.flaticon.com <br>2. Thankyou Freepik for the required images and graphics. Visit here to know more www.freepik.com <br>3. Thankyou Lottiefiles for the required animation files. Visit here to know more www.lottiefiles.com <br>4. Thankyou Flutter team for making app development easier and faster. Visit here to know more www.flutter.dev</h4>
+<br>
+
+<h1>A Team work by</h1>
+<h3>
+1. Adarsh Nagrikar
+<br> <br>
+<a href="https://www.linkedin.com/in/adarsh-nagrikar/">
+  <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=black" alt="Linkedin" height="32px">
+</a> <br> <br>
+<a href="https://github.com/adarshnagrikar14">
+  <img src="https://img.shields.io/github/followers/adarshnagrikar14?style=social" alt="Linkedin" height="32px">
+</a>
+</h3>
+<br>
+<h3>
+2. Harshita Soni
+<br> <br>
+<a href="https://www.linkedin.com/in/harshita-soni-85ba6922a/">
+  <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=black" alt="Linkedin" height="32px">
+</a> <br> <br>
+<a href="https://github.com/h-o-n-e-y">
+  <img src="https://img.shields.io/github/followers/h-o-n-e-y?style=social" alt="Linkedin" height="32px">
+</a>
+</h3>
+<br>
+<h3>
+3. Advika Metre
+<br> <br>
+<a href="https://www.linkedin.com/in/advika-metre-9a2aaa234/">
+  <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=black" alt="Linkedin" height="32px">
+</a> <br> <br>
+<a href="https://github.com/advikasm">
+  <img src="https://img.shields.io/github/followers/advikasm?style=social" alt="Linkedin" height="32px">
+</a>
+</h3>
+<br>
