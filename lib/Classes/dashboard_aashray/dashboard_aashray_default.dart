@@ -442,12 +442,8 @@ class _DashboardDefaultState extends State<DashboardDefault> {
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: const Center(
-                          child: Text(
-                            "\nProvide Aashray\n",
-                            style: TextStyle(
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: Image(
+                            image: AssetImage("assets/images/provide_a.jpg"),
                           ),
                         ),
                       ),
@@ -476,12 +472,8 @@ class _DashboardDefaultState extends State<DashboardDefault> {
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: const Center(
-                          child: Text(
-                            "\nProvide Food\n",
-                            style: TextStyle(
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: Image(
+                            image: AssetImage("assets/images/provide_f.jpg"),
                           ),
                         ),
                       ),
